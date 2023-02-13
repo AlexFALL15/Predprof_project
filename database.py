@@ -1,14 +1,15 @@
 import sqlite3
-from PyQt5.QtSerialPort import QSerialPort, QSerialPortInfo
 
+def make_stroke(comp, org, date, file_name):
+    con = sqlite3.connect('competitions.db')
+    cur = con.cursor
+    cur.execute(f"""insert into comps(comp_name, organisator, date, file) values('{comp}', '{org}', '{date}', '{file_name}')""")
+    con.close()
 
-class Data(QSerialPort):
-    def __init__(self, database_name):
-        super().__init__()
-        self.data = sqlite3.connect(database_name)
-        self.cur = self.data.cursor()
-        self.setBaudRate(115200)
-        self.info = QSerialPortInfo()
-
-    def import_data(self):
-        pass
+def get_file(comp):
+    con = sqlite3.connect('competitions.db')
+    cur = con.cursor
+    result = cur.execute(f"""select from comps file
+                         where comp='{comp}'""").fetchall()
+    con.close()
+    return result[0]
