@@ -14,13 +14,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class UiForm(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(471, 590)
+        MainWindow.resize(1153, 623)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(340, 10, 121, 31))
         self.pushButton.setStyleSheet("QPushButton{\n"
-"border-radius: 15px;\n"
+"border-radius: 10px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "}")
         self.pushButton.setObjectName("pushButton")
@@ -45,7 +45,7 @@ class UiForm(object):
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(340, 60, 91, 21))
         self.pushButton_2.setStyleSheet("QPushButton{\n"
-"border-radius: 15px;\n"
+"border-radius: 10px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "}")
         self.pushButton_2.setObjectName("pushButton_2")
@@ -77,12 +77,12 @@ class UiForm(object):
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(10, 90, 181, 30))
         self.pushButton_4.setStyleSheet("QPushButton{\n"
-"border-radius: 15px;\n"
+"border-radius: 10px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "}")
         self.pushButton_4.setObjectName("pushButton_4")
         self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(-20, -29, 521, 621))
+        self.frame.setGeometry(QtCore.QRect(-20, -29, 1181, 871))
         self.frame.setStyleSheet("QFrame{\n"
 "background-color: #282828;\n"
 "}")
@@ -96,17 +96,22 @@ class UiForm(object):
         self.pushButton_3 = QtWidgets.QPushButton(self.frame)
         self.pushButton_3.setGeometry(QtCore.QRect(30, 180, 141, 31))
         self.pushButton_3.setStyleSheet("QPushButton{\n"
-"border-radius: 15px;\n"
+"border-radius: 10px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "}")
         self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_5 = QtWidgets.QPushButton(self.frame)
         self.pushButton_5.setGeometry(QtCore.QRect(220, 120, 161, 30))
         self.pushButton_5.setStyleSheet("QPushButton{\n"
-"border-radius: 15px;\n"
+"border-radius: 10px;\n"
 "background-color: rgb(255, 255, 255);\n"
 "}")
         self.pushButton_5.setObjectName("pushButton_5")
+        self.tableWidget = QtWidgets.QTableWidget(self.frame)
+        self.tableWidget.setGeometry(QtCore.QRect(530, 50, 601, 511))
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setRowCount(0)
         self.frame.raise_()
         self.pushButton.raise_()
         self.label.raise_()
