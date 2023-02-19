@@ -124,6 +124,7 @@ class Window(QMainWindow, UiForm):
                 with open(f'{self.lineEdit.text()}.json', 'w+') as f:
                     json.dump(self.json, f)
                 self.pushButton_3.setDisabled(False)
+                self.pushButton_2.setDisabled(False)
 
     def graph(self):
         if self.current_race != 'Qualification':
