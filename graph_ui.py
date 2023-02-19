@@ -124,7 +124,6 @@ class UiForm(object):
         self.label_6.setStyleSheet("QLabel{\n"
 "color: rgb(255, 255, 255);\n"
 "}")
-        self.pushButton_6.setObjectName("pushButton_6")
         self.label_7 = QtWidgets.QLabel(self.frame)
         self.label_7.setGeometry(QtCore.QRect(560, 230, 101, 21))
         self.label_7.setStyleSheet("QLabel{\n"
