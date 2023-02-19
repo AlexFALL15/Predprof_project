@@ -45,8 +45,6 @@ class Window(QMainWindow, UiForm):
         self.pushButton_3.setDisabled(True)
         self.pushButton_4.clicked.connect(self.make_comp)
         self.pushButton_5.clicked.connect(self.un_log_in)
-        self.pushButton_6.clicked.connect(self.table)
-        self.pushButton_6.setDisabled(True)
 
     def make_comp(self):
         if self.lineEdit.text() == '' or self.lineEdit_2.text() == '' or self.racer_1.text() == '' or self.racer_2.text() == '':
