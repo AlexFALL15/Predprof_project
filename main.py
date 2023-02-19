@@ -57,7 +57,6 @@ class Window(QMainWindow, UiForm):
             self.racer_1.setDisabled(True)
             self.racer_2.setDisabled(True)
             self.pushButton_4.setDisabled(True)
-            self.pushButton_6.setDisabled(False)
             self.pushButton.setDisabled(False)
             self.setWindowTitle(self.lineEdit.text())
             self.racers = [self.racer_1.text(), self.racer_2.text()]
@@ -81,7 +80,6 @@ class Window(QMainWindow, UiForm):
         self.pushButton_4.setDisabled(False)
         self.pushButton_2.setDisabled(True)
         self.pushButton_3.setDisabled(True)
-        self.pushButton_6.setDisabled(True)
         self.setWindowTitle('Новое соревнования')
         self.comp = True
         self.current_race = ''
@@ -146,9 +144,6 @@ class Window(QMainWindow, UiForm):
                                    [i for i in data[self.racer_1.text()][self.current_race]], pen='w')
             self.graphicsView.plot([i for i in range(len(data[self.racer][self.current_race]))],
                                    [i for i in data[self.racer_2.text()][self.current_race]], pen='r')
-
-    def table(self):
-        pass
 
 
 if __name__ == "__main__":
