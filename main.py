@@ -36,6 +36,7 @@ class Window(QMainWindow, UiForm):
         self.racer = ''
         self.racers = []
         self.label_4.setText(self.date)
+        self.colors = {}
 
         self.pushButton.clicked.connect(self.make_race)
         self.pushButton.setDisabled(True)
@@ -45,8 +46,6 @@ class Window(QMainWindow, UiForm):
         self.pushButton_3.setDisabled(True)
         self.pushButton_4.clicked.connect(self.make_comp)
         self.pushButton_5.clicked.connect(self.un_log_in)
-        self.pushButton_6.clicked.connect(self.table)
-        self.pushButton_6.setDisabled(True)
 
     def make_comp(self):
         if self.lineEdit.text() == '' or self.lineEdit_2.text() == '' or self.racer_1.text() == '' or self.racer_2.text() == '':
@@ -59,10 +58,10 @@ class Window(QMainWindow, UiForm):
             self.racer_1.setDisabled(True)
             self.racer_2.setDisabled(True)
             self.pushButton_4.setDisabled(True)
-            self.pushButton_6.setDisabled(False)
             self.pushButton.setDisabled(False)
             self.setWindowTitle(self.lineEdit.text())
             self.racers = [self.racer_1.text(), self.racer_2.text()]
+            self.colors = {self.racer_1.text(): 'w', self.racer_2.text(): 'r'}
             self.label_8.setText(f'{self.racers[0]} - w')
             self.label_9.setText(f'{self.racers[1]} - r')
             if not check_in(self.lineEdit.text, self.lineEdit_2.text(), self.date, f'{self.lineEdit.text()}.json'):
@@ -83,7 +82,6 @@ class Window(QMainWindow, UiForm):
         self.pushButton_4.setDisabled(False)
         self.pushButton_2.setDisabled(True)
         self.pushButton_3.setDisabled(True)
-        self.pushButton_6.setDisabled(True)
         self.setWindowTitle('Новое соревнования')
         self.comp = True
         self.current_race = ''
@@ -96,8 +94,8 @@ class Window(QMainWindow, UiForm):
             self.race_type, 1, False)
         if ok_pressed:
             self.current_race = race_type
-            self.label_7.setText(f'{self.label_7.text()} {self.current_race}')
-            if self.json[self.racer][self.current_race] != '':
+            self.label_7.setText(f'Гонка {self.current_race}')
+            if self.json[self.racer][self.current_race] is not None:
                 self.pushButton_2.setDisabled(True)
                 self.pushButton_3.setDisabled(False)
             else:
@@ -115,19 +113,21 @@ class Window(QMainWindow, UiForm):
         if self.json[self.racer][self.current_race] is None:
             self.pushButton_2.setDisabled(True)
             time = int(self.label_3.text())
-            requests.get(URLSTART)
+            stt = requests.get(URLSTART, timeout=20)
             if time > 0:
                 self.label_3.setText(f"{time - 1}")
                 QTimer().singleShot(1000, self.start)
             else:
                 self.label_3.setText('30')
-                page = requests.get(URLSTOP)
-                soup = BeautifulSoup(page.text, 'html.parser')
-                d = list(map(int, soup.findAll('br')))
-                self.json[self.racer][self.current_race] = d
+                sp = []
+                page = requests.get(URLSTOP, timeout=20)
+                if page:
+                    sp = list(map(float, page.text.split(';\n')[:-1]))
+                self.json[self.racer][self.current_race] = sp
                 with open(f'{self.lineEdit.text()}.json', 'w+') as f:
                     json.dump(self.json, f)
                 self.pushButton_3.setDisabled(False)
+                self.pushButton_2.setDisabled(False)
 
     def graph(self):
         if self.current_race != 'Qualification':
@@ -142,15 +142,13 @@ class Window(QMainWindow, UiForm):
             data = json.load(f)
         if self.current_race == 'Qualification':
             self.graphicsView.plot([i for i in range(len(data[self.racer][self.current_race]))],
-                                   [i for i in data[self.racer][self.current_race]], pen='w')
+                                   [i for i in data[self.racer][self.current_race]], pen=self.colors[self.racer])
         else:
-            self.graphicsView.plot([i for i in range(len(data[self.racer][self.current_race]))],
-                                   [i for i in data[self.racer_1.text()][self.current_race]], pen='w')
-            self.graphicsView.plot([i for i in range(len(data[self.racer][self.current_race]))],
-                                   [i for i in data[self.racer_2.text()][self.current_race]], pen='r')
+            self.graphicsView.plot([i for i in range(len(data[self.racer_1.text()][self.current_race]))],
+                                   [i for i in data[self.racer_1.text()][self.current_race]], pen=self.colors[self.racer_1.text()])
+            self.graphicsView.plot([i for i in range(len(data[self.racer_2.text()][self.current_race]))],
+                                   [i for i in data[self.racer_2.text()][self.current_race]], pen=self.colors[self.racer_2.text()])
 
-    def table(self):
-        pass
 
 
 if __name__ == "__main__":

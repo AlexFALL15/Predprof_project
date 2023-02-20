@@ -124,14 +124,6 @@ class UiForm(object):
         self.label_6.setStyleSheet("QLabel{\n"
 "color: rgb(255, 255, 255);\n"
 "}")
-        self.label_6.setObjectName("label_6")
-        self.pushButton_6 = QtWidgets.QPushButton(self.frame)
-        self.pushButton_6.setGeometry(QtCore.QRect(560, 170, 111, 31))
-        self.pushButton_6.setStyleSheet("QPushButton{\n"
-"border-radius: 10px;\n"
-"background-color: rgb(255, 255, 255);\n"
-"}")
-        self.pushButton_6.setObjectName("pushButton_6")
         self.label_7 = QtWidgets.QLabel(self.frame)
         self.label_7.setGeometry(QtCore.QRect(560, 230, 101, 21))
         self.label_7.setStyleSheet("QLabel{\n"
@@ -173,6 +165,5 @@ class UiForm(object):
         self.pushButton_2.setText(_translate("MainWindow", "Начать гонку"))
         self.label_3.setText(_translate("MainWindow", "30"))
         self.label_6.setText(_translate("MainWindow", "Введите номера измеряемых гонщиков:"))
-        self.pushButton_6.setText(_translate("MainWindow", "Получить таблицу"))
         self.label_7.setText(_translate("MainWindow", "Гонка:"))
 from pyqtgraph import PlotWidget
